@@ -200,7 +200,7 @@ export default function LandingPage() {
                             />
                         </div>
 
-                        <div className="flex flex-col pt-40 sm:pt-60 md:pt-70">
+                        <div className="flex flex-col pt-40 sm:pt-60 md:pt-70 md:p-5 lg:max-w-7xl">
                             <h1 className='text-3xl font-semibold mb-4 px-5 text-start text-[#EDEDEC] pb-5 md:text-4xl md:px-0'
                                 id='beneficios'
                             >
@@ -277,7 +277,7 @@ export default function LandingPage() {
 
                                 <div className='flex flex-col items-start justify-start gap-6 lg:flex-row '>
 
-                                    <div className="embla lg:hidden" ref={emblaRef}>
+                                    <div className="flex items-center justify-center embla xl:hidden hover:cursor-grabbing" ref={emblaRef}>
                                         <div className="embla__container">
                                             <img className="embla__slide" src="/landing-page-images/frame 1.png" />
                                             <img className="embla__slide" src="/landing-page-images/frame 2.png" />
@@ -286,28 +286,28 @@ export default function LandingPage() {
                                         </div>
                                     </div>
 
-                                    <div className='hidden xl:flex flex-row items-center justify-center gap-6'>
+                                    <div className='hidden xl:flex flex-row items-center justify-center gap-6 '>
                                         <img
                                             src="/landing-page-images/frame 1.png"
-                                            className="max-w-[700px] 3xl:max-w-[800px]"
+                                            className=' w-[290px] '
                                             alt="Galeria de imagens"
                                             aria-label="Galeria de imagens"
                                         />
                                         <img
                                             src="/landing-page-images/frame 2.png"
-                                            className="max-w-[700px] 3xl:max-w-[800px]"
+                                            className=' w-[290px] '
                                             alt="Galeria de imagens"
                                             aria-label="Galeria de imagens"
                                         />
                                         <img
                                             src="/landing-page-images/frame 3.png"
-                                            className="max-w-[700px] 3xl:max-w-[800px]"
+                                            className=' w-[290px] '
                                             alt="Galeria de imagens"
                                             aria-label="Galeria de imagens"
                                         />
                                         <img
                                             src="/landing-page-images/frame 4.png"
-                                            className="max-w-[700px] 3xl:max-w-[800px]"
+                                            className=' w-[290px] '
                                             alt="Galeria de imagens"
                                             aria-label="Galeria de imagens"
                                         />
