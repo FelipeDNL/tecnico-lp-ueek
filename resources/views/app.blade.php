@@ -32,7 +32,7 @@
 
         <title inertia>{{ config('app.name') }}</title>
 
-        <link rel="icon" href="/logo-movefit-mini.png" sizes="any">
+        <link rel="icon" href="/landing-page-images/logo-movefit-mini.png" sizes="any">
         <link rel="icon" href="/logo-movefit-mini" type="image/svg+xml">
         <link rel="logo-movefit-mini" href="/logo-movefit-mini.png">
 

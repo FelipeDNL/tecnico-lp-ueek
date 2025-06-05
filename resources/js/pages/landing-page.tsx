@@ -2,11 +2,13 @@ import { Head, Link, usePage } from '@inertiajs/react';
 import AppCard from '../components/app-card';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
+import AppHeader from '../components/app-header';
 
 import '../../css/embla-carousel.css'
 
 export default function LandingPage() {
     const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay()])
+    const { depoimentos } = (usePage().props as unknown as { depoimentos: Array<{ id: number, usuario: string, mensagem: string, foto: string | null }> });
 
     return (
         <>
@@ -16,144 +18,8 @@ export default function LandingPage() {
             </Head>
 
             <div className="flex flex-col items-center px-0 p-3 text-[#EDEDEC] bg-[#080F17]">
-                <header className="border-b border-[#FFFFFF33] mb-3 text-m pb-4 w-full px-5 lg:max-w-7xl">
-                    <nav className="flex gap-4">
-                        <div className='flex items-center justify-start gap-9 text-[#EDEDEC]'>
-
-                            <div className="flex md:hidden items-center">
-                                <button
-                                    aria-label="Abrir menu"
-                                    className="p-1 rounded focus:outline-none focus:ring-2 focus:ring-[#A7EE43]"
-                                    onClick={() => {
-                                        const menu = document.getElementById('mobile-menu');
-                                        if (menu) {
-                                            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-                                        }
-                                    }}
-                                >
-                                    <svg width="28" height="28" fill="none" viewBox="0 0 24 24">
-                                        <rect y="4" width="24" height="2" rx="1" fill="#EDEDEC" />
-                                        <rect y="11" width="24" height="2" rx="1" fill="#EDEDEC" />
-                                        <rect y="18" width="24" height="2" rx="1" fill="#EDEDEC" />
-                                    </svg>
-                                </button>
-
-                                <div
-                                    id="mobile-menu"
-                                    className="absolute top-16 left-0 w-full bg-[#080F17] border-b border-[#FFFFFF33] flex flex-col gap-1 px-6 py-4 z-50 hidden transition-opacity duration-300 starting:opacity-0"
-                                >
-                                    <div
-                                        className="cursor-pointer py-2"
-                                        onClick={() => {
-                                            document.getElementById('inicio')?.scrollIntoView({ behavior: 'smooth' });
-                                            document.getElementById('mobile-menu')!.style.display = 'none';
-                                        }}
-                                    >
-                                        Início
-                                    </div>
-                                    <div
-                                        className="cursor-pointer py-2"
-                                        onClick={() => {
-                                            document.getElementById('beneficios')?.scrollIntoView({ behavior: 'smooth' });
-                                            document.getElementById('mobile-menu')!.style.display = 'none';
-                                        }}
-                                    >
-                                        Benefícios
-                                    </div>
-                                    <div
-                                        className="cursor-pointer py-2"
-                                        onClick={() => {
-                                            document.getElementById('depoimentos')?.scrollIntoView({ behavior: 'smooth' });
-                                            document.getElementById('mobile-menu')!.style.display = 'none';
-                                        }}
-                                    >
-                                        Depoimentos
-                                    </div>
-                                    <div
-                                        className="cursor-pointer py-2"
-                                        onClick={() => {
-                                            document.getElementById('galeria')?.scrollIntoView({ behavior: 'smooth' });
-                                            document.getElementById('mobile-menu')!.style.display = 'none';
-                                        }}
-                                    >
-                                        Galeria
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="flex items-center gap-2">
-                                <img
-                                    src="/landing-page-images/logo-movefit.png"
-                                    className="object-scale-down h-10 w-auto"
-                                    alt="Logo Movefit"
-                                    aria-label="Logo Movefit"
-                                />
-                            </div>
-
-                            <div className="hidden md:flex items-center gap-6"
-                                id='menu-navegacao'>
-                                <div
-                                    className="cursor-pointer"
-                                    onClick={() => {
-                                        const section = document.getElementById('inicio');
-                                        if (section) {
-                                            section.scrollIntoView({ behavior: 'smooth' });
-                                        }
-                                    }}
-                                >
-                                    Início
-                                </div>
-
-                                <div
-                                    className="cursor-pointer"
-                                    onClick={() => {
-                                        const section = document.getElementById('beneficios');
-                                        if (section) {
-                                            section.scrollIntoView({ behavior: 'smooth' });
-                                        }
-                                    }}
-                                >
-                                    Benefícios
-                                </div>
-
-                                <div
-                                    className="cursor-pointer"
-                                    onClick={() => {
-                                        const section = document.getElementById('depoimentos');
-                                        if (section) {
-                                            section.scrollIntoView({ behavior: 'smooth' });
-                                        }
-                                    }}
-                                >
-                                    Depoimentos
-                                </div>
-
-                                <div
-                                    className="cursor-pointer"
-                                    onClick={() => {
-                                        const section = document.getElementById('galeria');
-                                        if (section) {
-                                            section.scrollIntoView({ behavior: 'smooth' });
-                                        }
-                                    }}
-                                >
-                                    Galeria
-                                </div>
-                            </div>
-                        </div>
-                        <div className='flex items-center justify-end gap-2 ml-auto'>
-                            <Link
-                                href={route('login')}
-                                className="inline-block rounded-md border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-white hover:border-white"
-                            >
-                                Login
-                            </Link>
-                            <p className="inline-block rounded-md border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#000A14] font-bold bg-[#A7EE43] hover:border-[#1915014a] hover:cursor-pointer">
-                                Teste grátis
-                            </p>
-                        </div>
-                    </nav>
-                </header>
+        
+                <AppHeader />
 
                 <main id="inicio">
                     <div className="flex flex-col px-5 pt-30 transition-opacity duration-1000 starting:opacity-0">
@@ -259,15 +125,30 @@ export default function LandingPage() {
                                     />
                                 </div>
                             </div>
+                            {depoimentos && depoimentos.length !== 0 && (
+                                <div className='flex flex-col items-start justify-start gap-3 pt-15'>
+                                    <h1 className='text-3xl px-5 font-semibold mb-4 text-start text-[#EDEDEC] md:text-4xl md:px-0'
+                                        id='depoimentos'
+                                    >
+                                        Depoimentos
+                                    </h1>
 
-                            <div className='flex flex-col items-start justify-start gap-3 pt-15'>
-                                <h1 className='text-3xl px-5 font-semibold mb-4 text-start text-[#EDEDEC] md:text-4xl md:px-0'
-                                    id='depoimentos'
-                                >
-                                    Depoimentos
-                                </h1>
-                            </div>
+                                    <div className="flex flex-col gap-4">
+                                        {depoimentos && depoimentos.map((dep) => (
+                                            <div key={dep.id} className="bg-[#19140035] rounded-lg p-4 flex items-center gap-4">
+                                                {dep.foto && (
+                                                    <img src={dep.foto} alt={dep.usuario} className="w-12 h-12 rounded-full object-cover" />
+                                                )}
+                                                <div>
+                                                    <div className="font-bold">{dep.usuario}</div>
+                                                    <div className="text-sm">{dep.mensagem}</div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
 
+                                </div>
+                            )}
                             <div className='flex flex-col items-start justify-start gap-3 border-b border-[#3E3E3A] pb-15'>
                                 <h1 className='text-3xl px-5 font-semibold mb-4 text-start text-[#EDEDEC] pt-50 md:text-4xl md:px-0'
                                     id='galeria'

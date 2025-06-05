@@ -36,6 +36,6 @@ class PasswordResetLinkController extends Controller
             $request->only('email')
         );
 
-        return back()->with('status', __('A reset link will be sent if the account exists.'));
+        return back()->with('status', __('Caso a conta exista, um link de redefinição de senha foi enviado para o seu e-mail.'));
     }
 }
