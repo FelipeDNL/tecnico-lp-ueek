@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('usuario');
             $table->text('mensagem');
-            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

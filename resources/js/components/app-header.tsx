@@ -1,13 +1,20 @@
 import React from "react";
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { usePage } from "@inertiajs/react";
-import { Link } from "lucide-react";
+import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
+import { router, usePage } from "@inertiajs/react";
+import { ChevronDown, Link } from "lucide-react";
 import { pegarNome } from "@/hooks/use-nome";
 
 const AppHeader = () => {
     const { auth } = usePage().props as { auth?: { user?: any } };
     const estaLogado = !!auth?.user;
-    const getInitials = pegarNome();
+    const getNome = pegarNome();
+    const cleanup = useMobileNavigation();
+
+    const handleLogout = () => {
+        cleanup();
+        router.flushAll();
+    }
 
     return (
         <header className="sticky top-0 z-50 border-b border-[#FFFFFF33] bg-[#080F17] mb-3 text-m pb-4 pt-2 px-4 lg:px-65 w-full ">
@@ -137,21 +144,19 @@ const AppHeader = () => {
                 </div>
                 <div className='flex items-center justify-end gap-2 ml-auto'>
 
-                    {!estaLogado ? (
-                        <Link
+                    { !estaLogado ? (
+                        <a
                             href={route('login')}
                             className="inline-block rounded-md border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-white hover:border-white"
                         >
                             Login
-                        </Link>
+                        </a>
                     ) : (
                         <Menu as="div" className="relative inline-block text-left">
                             <div>
-                                <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rinline-block rounded-md border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-white hover:border-white ring-1 ring-inset hover:cursor-pointer hover:bg-gray-10">
-                                    {getInitials(auth.user.name)}
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                    </svg>
+                                <MenuButton className="inline-flex w-full items-center justify-center gap-x-1 rinline-block rounded-md border border-[#19140035] px-3 py-1.5 text-sm leading-normal text-white hover:border-white ring-1 ring-inset hover:cursor-pointer hover:bg-gray-10">
+                                    {getNome(auth.user.name)}
+                                    <ChevronDown />
                                 </MenuButton>
                             </div>
 
@@ -176,16 +181,19 @@ const AppHeader = () => {
                                             Leads
                                         </a>
                                     </MenuItem>
-                                    <form method="POST" action={route('logout')}>
-                                        <MenuItem>
-                                            <button
-                                                type="submit"
-                                                className="block w-full px-4 py-2 text-left text-sm text-white data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
-                                            >
-                                                Sair
-                                            </button>
-                                        </MenuItem>
-                                    </form>
+                                    <MenuItem>
+                                        <a
+                                            href={route('logout')}
+                                            className="block px-4 py-2 text-sm text-white data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
+                                            onClick={e => {
+                                                e.preventDefault();
+                                                handleLogout();
+                                                router.post(route('logout'));
+                                            }}
+                                        >
+                                            Sair
+                                        </a>
+                                    </MenuItem>
                                 </div>
                             </MenuItems>
                         </Menu>

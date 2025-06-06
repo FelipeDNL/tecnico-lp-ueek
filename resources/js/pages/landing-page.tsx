@@ -18,7 +18,7 @@ export default function LandingPage() {
             </Head>
 
             <div className="flex flex-col items-center px-0 p-3 text-[#EDEDEC] bg-[#080F17]">
-        
+
                 <AppHeader />
 
                 <main id="inicio">
@@ -193,11 +193,8 @@ export default function LandingPage() {
                                             aria-label="Galeria de imagens"
                                         />
                                     </div>
-
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                 </main>
