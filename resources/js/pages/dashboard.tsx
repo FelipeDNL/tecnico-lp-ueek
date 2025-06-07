@@ -7,7 +7,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Gestão de Depoimentos',
         href: '/dashboard',
-    },
+    }
 ];
 
 export default function Dashboard() {

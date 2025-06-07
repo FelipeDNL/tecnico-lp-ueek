@@ -1,44 +1,51 @@
 import AppLayout from '@/layouts/app-layout';
 import DepoimentoForm from '@/components/depoimento-form';
-import { Head, router } from '@inertiajs/react';
+import { Head, router, usePage } from '@inertiajs/react';
 import { BreadcrumbItem } from '@/types';
-
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Novo Depoimento',
+        title: 'Editar Depoimento',
         href: '#',
     }
 ];
 
+interface Depoimento {
+    id: number;
+    usuario: string;
+    mensagem: string;
+    created_at: string;
+    updated_at: string;
+}
+
 interface FormData {
     usuario: string;
     mensagem: string;
-    [key: string]: any; // Permite outros campos adicionais
+    [key: string]: any;
 }
 
-export default function CreateDepoimento() {
+export default function EditDepoimento() {
+    const { depoimentos } = usePage<{ depoimentos: Depoimento }>().props;
+    
     function handleSubmit(data: FormData, resetForm: () => void): void {
-        console.log('Dados recebidos no create:', data); // Debug
-
-        router.post(route('depoimentos.store'), data, {
+        router.put(route('depoimentos.update', depoimentos.id), data, {
             onSuccess: () => {
                 resetForm();
                 router.visit(route('dashboard'));
             },
             onError: (errors) => {
-                console.log('Erro ao criar:', errors);
+                console.log('Erro ao atualizar:', errors);
             }
         });
     }
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Novo Depoimento" />
+            <Head title="Editar Depoimento" />
             <DepoimentoForm
                 initialData={{
-                    usuario: '',
-                    mensagem: '',
+                    usuario: depoimentos.usuario,
+                    mensagem: depoimentos.mensagem,
                 }}
                 onSubmit={handleSubmit}
                 onClose={() => router.visit(route('dashboard'))}

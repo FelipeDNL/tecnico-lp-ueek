@@ -1,9 +1,6 @@
-import React from "react";
-
 import { ChevronDown, PenLine, Plus, Trash2 } from 'lucide-react';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { usePage, Link } from "@inertiajs/react";
-
 
 export default function DepoimentosMain() {
     const { depoimentos } = (usePage().props as unknown as {
@@ -17,65 +14,80 @@ export default function DepoimentosMain() {
     });
 
     return (
-        <div className='text-sm'>
-            <div className='flex flex-row items-center justify-between gap-2 border-b '>
-                <p className='text-md p-4 sm:text-md'>Aqui você pode adicionar, editar e deletar depoimentos. </p>
-                <div className='flex gap-2 pr-5'>
+        <div className='text-sm md:text-sm lg:max-w-3xl'>
+            <div className='flex flex-row items-center justify-between border-b '>
+                <p className='text-md p-4 p'>Aqui você pode visualizar, adicionar, editar e deletar depoimentos. </p>
+                <div className='gap-2 pr-5'>
                     <Link
                         href={route('depoimentos.create')}
-                        className='inline-block rounded-md border border-[#19140035] px-4 py-4 text-sm leading-normal bg-green-400 text-white hover:border-black'
+                        className='inline-block rounded-md border border-[#19140035] px-2 py-1 text-xs leading-normal bg-[#A7EE43] text-black hover:ring-1 hover:ring-[#A7EE43] hover:transition-[color,box-shadow] hover:ring-offset-1 hover:ring-offset-[#19140035] hover:border-black'
                     >
-                        <Plus />
+                        <div className="flex flex-row justify-center items-center lg:text-sm lg:gap-1"> Depoimento <Plus className="h-4 w-4 lg:h-5 lg:w-5" /></div>
+
                     </Link>
                 </div>
             </div>
 
             {depoimentos.map((dep) => (
-                <div className='border-b px-3'>
-                    <div key={dep.id} className='flex flex-4 flex-row p-2'>
-                        <p className='px-1'>{dep.mensagem}</p>
+                <div key={dep.id} className='px-3 pb-3'>
+                    <div className='flex flex-row p-2 justify-between gap-2'>
+                        <p className='px-1 break-all'>{dep.mensagem}</p>
 
-                        <Menu as='div' className="relative inline-block text-left">
-                            <div>
-                                <MenuButton className="inline-flex w-full items-center justify-center gap-x-1 rinline-block rounded-md border border-[#19140035] px-3 py-1.5 text-sm leading-normal text-white hover:border-white ring-1 ring-inset hover:cursor-pointer hover:bg-gray-10">
-                                    <ChevronDown />
+                        <div className='lg:hidden '>
+                            <Menu as='div' className="flex text-xs inline-block text-left">
+                                <MenuButton className="inline-flex w-full items-center justify-center rounded-md border border-[#19140035] px-.5 py-.5 text-sm leading-normal text-white hover:border-white ring-1 ring-inset hover:cursor-pointer hover:bg-gray-10">
+                                    <ChevronDown className="h-5 w-5" />
                                 </MenuButton>
+                                <MenuItems
+                                    className="absolute right-0 z-10 mt-2 w-40 rounded-md border bg-[#080F17] shadow-lg ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+                                >
+                                    <MenuItem>
+                                        <Link
+                                            href={route('depoimentos.edit', dep.id)}
+                                            className="rounded-t-md block px-4 py-2 text-white data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
+                                        >
+                                            <p className='flex'><PenLine className="h-4 w-4 mr-2" /> Editar </p>
+                                        </Link>
+                                    </MenuItem>
+                                    <MenuItem>
+                                        <Link
+                                            href={route('depoimentos.destroy', dep.id)}
+                                            method="delete"
+                                            as="button"
+                                            className="block px-4 py-2 text-white w-39.5 data-focus:bg-red-900 data-focus:text-white-900 data-focus:rounded-b-md data-focus:outline-hidden"
+                                        >
+                                            <p className='flex'><Trash2 className="h-4 w-4 mr-2" /> Excluir </p>
+                                        </Link>
+                                    </MenuItem>
+                                </MenuItems>
+                            </Menu>
+                        </div>
+
+                        <div className='hidden lg:block'>
+                            <div className='flex flex-row gap-2'>
+                                <Link
+                                    href={route('depoimentos.edit', dep.id)}
+                                    className='inline-block rounded-md border border-[#19140035] px-2 py-1 text-xs leading-normal bg-white text-black hover:ring-1 hover:ring-white hover:ring-offset-1 hover:ring-offset-[#19140035] hover:border-black transition-[color,box-shadow] '
+                                >
+                                    <div className="flex flex-row justify-center items-center lg:text-sm lg:gap-1"> Editar <PenLine className="h-4 w-4 lg:h-5 lg:w-5" /></div>
+                                </Link>
+                                <Link
+                                    href={route('depoimentos.destroy', dep.id)}
+                                    method="delete"
+                                    as="button"
+                                    className='inline-block rounded-md border border-[#19140035] px-2 py-1 text-xs leading-normal bg-red-900 text-white hover:ring-1 hover:ring-red-900 hover:ring-offset-1 hover:ring-offset-[#19140035] hover:border-black transition-[color,box-shadow] '
+                                >
+                                    <div className="flex flex-row justify-center items-center lg:text-sm lg:gap-1"> Apagar <Trash2 className="h-4 w-4 lg:h-5 lg:w-5" /></div>
+                                </Link>
                             </div>
-
-                            <MenuItems
-                                transition
-                                className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md border bg-[#080F17] shadow-lg ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
-                            >
-                                <div className="py-1">
-                                    <MenuItem>
-                                        <a
-                                            href={route('dashboard')}
-                                            className="block px-4 py-2 text-sm text-white data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
-                                        >
-                                            Dashboard
-                                        </a>
-                                    </MenuItem>
-                                    <MenuItem>
-                                        <a
-                                            href={route('login')}
-                                            className="block px-4 py-2 text-sm text-white data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
-                                        >
-                                            Leads
-                                        </a>
-                                    </MenuItem>
-                                </div>
-                            </MenuItems>
-                        </Menu>
-
+                        </div>
                     </div>
 
 
-                    <div className='text-xs flex justify-evenly p-2 gap-2 border-t'>
-                        <p>{dep.id}</p>
-                        <p className='border-r pr-2'></p>
-                        <p>{dep.usuario}</p>
-                        <p className='border-r pr-2'></p>
-                        <p className='flex items-center pt-0.5'>{new Date(dep.created_at).toLocaleString()}</p>
+                    <div className='text-xs flex justify-start p-2 gap-2 border-y lg:justify-start'>
+                        <p className='border-r pr-3 '>ID: {dep.id}</p>
+                        <p className="overflow-hidden ">{dep.usuario}</p>
+                        <p className='flex items-center pt-0.5 border-l pl-2'>{new Date(dep.created_at).toLocaleString()}</p>
                     </div>
                 </div>
             ))}

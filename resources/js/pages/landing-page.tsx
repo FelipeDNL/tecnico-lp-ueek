@@ -8,7 +8,10 @@ import '../../css/embla-carousel.css'
 
 export default function LandingPage() {
     const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay()])
-    const { depoimentos } = (usePage().props as unknown as { depoimentos: Array<{ id: number, usuario: string, mensagem: string, foto: string | null }> });
+    const { depoimentos } = (usePage().props as unknown as { depoimentos: Array<{ id: number, usuario: string, mensagem: string, created_at: string, updated_at: string }> });
+
+    depoimentos.sort((a, b) => b.id - a.id);
+    depoimentos.length = 6;
 
     return (
         <>
@@ -126,22 +129,26 @@ export default function LandingPage() {
                                 </div>
                             </div>
                             {depoimentos && depoimentos.length !== 0 && (
-                                <div className='flex flex-col items-start justify-start gap-3 pt-15'>
-                                    <h1 className='text-3xl px-5 font-semibold mb-4 text-start text-[#EDEDEC] md:text-4xl md:px-0'
+                                <div className='flex flex-col items-start justify-start gap-3 pt-15 px-3'>
+                                    <h1 className='text-3xl px-2 font-semibold mb-4 text-start text-[#EDEDEC] md:text-4xl md:px-0'
                                         id='depoimentos'
                                     >
                                         Depoimentos
                                     </h1>
-
-                                    <div className="flex flex-col gap-4">
-                                        {depoimentos && depoimentos.map((dep) => (
-                                            <div key={dep.id} className="bg-[#19140035] rounded-lg p-4 flex items-center gap-4">
-                                                {dep.foto && (
-                                                    <img src={dep.foto} alt={dep.usuario} className="w-12 h-12 rounded-full object-cover" />
-                                                )}
-                                                <div>
-                                                    <div className="font-bold">{dep.usuario}</div>
-                                                    <div className="text-sm">{dep.mensagem}</div>
+                                    
+                                    <div className="flex flex-col gap-4 px-3 w-full lg:flex-row lg:flex-wrap lg:justify-evenly lg:items-start">
+                                        {depoimentos && depoimentos.map((dep, idx) => (
+                                            <div
+                                                key={dep.id}
+                                                className="bg-[#19140035] border border-[#A7EE43] rounded-lg p-4 gap-4 mb-4 lg:mb-0 lg:w-[30%] lg:mr-[1%] lg:last:mr-0"
+                                                style={{
+                                                    marginRight: (idx + 1) % 3 === 0 ? 0 : undefined,
+                                                }}
+                                            >
+                                                <div className='break-all gap-2'>
+                                                    <p className="font-bold">{dep.usuario}</p>
+                                                    <p className="text-sm">{dep.mensagem}</p>
+                                                    <p className='text-xs'>{new Date(dep.created_at).toLocaleString().split(',')[0]}</p>
                                                 </div>
                                             </div>
                                         ))}
@@ -149,7 +156,7 @@ export default function LandingPage() {
 
                                 </div>
                             )}
-                            <div className='flex flex-col items-start justify-start gap-3 border-b border-[#3E3E3A] pb-15'>
+                            <div className='flex flex-col items-start justify-start gap-3 border-b pb-15'>
                                 <h1 className='text-3xl px-5 font-semibold mb-4 text-start text-[#EDEDEC] pt-50 md:text-4xl md:px-0'
                                     id='galeria'
                                 >
@@ -210,12 +217,11 @@ export default function LandingPage() {
                     </div>
 
                     <div className='text-[#EDEDEC]'>
-                        <Link
-                            href={route('login')}
-                            className="inline-block rounded-sm border px-5 py-1.5 text-md leading-normal text-[#1b1b18] hover:border-[#19140035] text-white"
+                        <p
+                            className="inline-block rounded-sm border px-5 py-1.5 text-md leading-normal text-[#1b1b18] hover:border-[#19140035] text-white hover:cursor-pointer md:text-lg md:py-2 md:px-6"
                         >
                             Fale conosco
-                        </Link>
+                        </p>
                     </div>
                 </footer>
             </div>

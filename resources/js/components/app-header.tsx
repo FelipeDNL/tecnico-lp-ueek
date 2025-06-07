@@ -85,7 +85,7 @@ const AppHeader = () => {
                     <div className="flex items-center gap-2">
                         <img
                             src="/landing-page-images/logo-movefit.png"
-                            className="object-scale-down h-10 w-auto"
+                            className="object-scale-down h-10 w-auto min-w-[100px]"
                             alt="Logo Movefit"
                             aria-label="Logo Movefit"
                         />
@@ -199,7 +199,7 @@ const AppHeader = () => {
                         </Menu>
                     )}
 
-                    <p className="inline-block rounded-md border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#000A14] font-bold bg-[#A7EE43] hover:border-[#1915014a] hover:cursor-pointer">
+                    <p className="inline-block rounded-md border border-[#19140035] px-4 py-2 text-sm  text-[#000A14] font-bold bg-[#A7EE43] hover:border-[#1915014a] hover:cursor-pointer">
                         Teste grátis
                     </p>
                 </div>
