@@ -2,6 +2,7 @@ import AppLayout from '@/layouts/app-layout';
 import DepoimentoForm from '@/components/depoimento-form';
 import { Head, router, usePage } from '@inertiajs/react';
 import { BreadcrumbItem } from '@/types';
+import toast from 'react-hot-toast';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -31,9 +32,11 @@ export default function EditDepoimento() {
         router.put(route('depoimentos.update', depoimentos.id), data, {
             onSuccess: () => {
                 resetForm();
+                toast.success('Depoimento atualizado com sucesso!');
                 router.visit(route('dashboard'));
             },
             onError: (errors) => {
+                toast.error('Erro ao atualizar depoimento. Verifique os dados e tente novamente.');
                 console.log('Erro ao atualizar:', errors);
             }
         });

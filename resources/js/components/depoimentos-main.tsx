@@ -1,6 +1,7 @@
 import { ChevronDown, PenLine, Plus, Trash2 } from 'lucide-react';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { usePage, Link } from "@inertiajs/react";
+import DeleteDepoimentoModal from './depoimentos-delete-modal';
 
 export default function DepoimentosMain() {
     const { depoimentos } = (usePage().props as unknown as {
@@ -14,8 +15,8 @@ export default function DepoimentosMain() {
     });
 
     return (
-        <div className='text-sm md:text-sm lg:max-w-3xl'>
-            <div className='flex flex-row items-center justify-between border-b '>
+        <div className='text-sm md:text-sm '>
+            <div className='flex flex-row items-center justify-between border-b mb-5'>
                 <p className='text-md p-4 p'>Aqui você pode visualizar, adicionar, editar e deletar depoimentos. </p>
                 <div className='gap-2 pr-5'>
                     <Link
@@ -23,13 +24,12 @@ export default function DepoimentosMain() {
                         className='inline-block rounded-md border border-[#19140035] px-2 py-1 text-xs leading-normal bg-[#A7EE43] text-black hover:ring-1 hover:ring-[#A7EE43] hover:transition-[color,box-shadow] hover:ring-offset-1 hover:ring-offset-[#19140035] hover:border-black'
                     >
                         <div className="flex flex-row justify-center items-center lg:text-sm lg:gap-1"> Depoimento <Plus className="h-4 w-4 lg:h-5 lg:w-5" /></div>
-
                     </Link>
                 </div>
             </div>
 
             {depoimentos.map((dep) => (
-                <div key={dep.id} className='px-3 pb-3'>
+                <div key={dep.id} className='px-3 lg:px-10 pb-3'>
                     <div className='flex flex-row p-2 justify-between gap-2'>
                         <p className='px-1 break-all'>{dep.mensagem}</p>
 
@@ -50,14 +50,11 @@ export default function DepoimentosMain() {
                                         </Link>
                                     </MenuItem>
                                     <MenuItem>
-                                        <Link
-                                            href={route('depoimentos.destroy', dep.id)}
-                                            method="delete"
-                                            as="button"
+                                        <DeleteDepoimentoModal
+                                            depoimentoId={dep.id}
+                                            variant="menuItem"
                                             className="block px-4 py-2 text-white w-39.5 data-focus:bg-red-900 data-focus:text-white-900 data-focus:rounded-b-md data-focus:outline-hidden"
-                                        >
-                                            <p className='flex'><Trash2 className="h-4 w-4 mr-2" /> Excluir </p>
-                                        </Link>
+                                        />
                                     </MenuItem>
                                 </MenuItems>
                             </Menu>
@@ -71,18 +68,13 @@ export default function DepoimentosMain() {
                                 >
                                     <div className="flex flex-row justify-center items-center lg:text-sm lg:gap-1"> Editar <PenLine className="h-4 w-4 lg:h-5 lg:w-5" /></div>
                                 </Link>
-                                <Link
-                                    href={route('depoimentos.destroy', dep.id)}
-                                    method="delete"
-                                    as="button"
-                                    className='inline-block rounded-md border border-[#19140035] px-2 py-1 text-xs leading-normal bg-red-900 text-white hover:ring-1 hover:ring-red-900 hover:ring-offset-1 hover:ring-offset-[#19140035] hover:border-black transition-[color,box-shadow] '
-                                >
-                                    <div className="flex flex-row justify-center items-center lg:text-sm lg:gap-1"> Apagar <Trash2 className="h-4 w-4 lg:h-5 lg:w-5" /></div>
-                                </Link>
+                                <DeleteDepoimentoModal
+                                    depoimentoId={dep.id}
+                                    className='inline-block rounded-md border border-[#19140035] px-2 py-1 text-xs leading-normal bg-red-900 text-white hover:ring-1 hover:ring-red-900 hover:ring-offset-1 hover:ring-offset-[#19140035] hover:border-black transition-[color,box-shadow]'
+                                />
                             </div>
                         </div>
                     </div>
-
 
                     <div className='text-xs flex justify-start p-2 gap-2 border-y lg:justify-start'>
                         <p className='border-r pr-3 '>ID: {dep.id}</p>
@@ -91,7 +83,6 @@ export default function DepoimentosMain() {
                     </div>
                 </div>
             ))}
-
         </div>
     );
 }

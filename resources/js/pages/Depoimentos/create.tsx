@@ -2,7 +2,7 @@ import AppLayout from '@/layouts/app-layout';
 import DepoimentoForm from '@/components/depoimento-form';
 import { Head, router } from '@inertiajs/react';
 import { BreadcrumbItem } from '@/types';
-
+import toast from 'react-hot-toast';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -14,19 +14,19 @@ const breadcrumbs: BreadcrumbItem[] = [
 interface FormData {
     usuario: string;
     mensagem: string;
-    [key: string]: any; // Permite outros campos adicionais
+    [key: string]: any;
 }
 
 export default function CreateDepoimento() {
     function handleSubmit(data: FormData, resetForm: () => void): void {
-        console.log('Dados recebidos no create:', data); // Debug
-
         router.post(route('depoimentos.store'), data, {
             onSuccess: () => {
                 resetForm();
+                toast.success('Depoimento criado com sucesso!');
                 router.visit(route('dashboard'));
             },
             onError: (errors) => {
+                toast.error('Erro ao criar depoimento. Verifique os dados e tente novamente.');
                 console.log('Erro ao criar:', errors);
             }
         });
