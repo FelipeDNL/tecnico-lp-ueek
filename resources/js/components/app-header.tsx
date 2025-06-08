@@ -7,12 +7,12 @@ import { usePegarNome } from "@/hooks/use-nome";
 
 type AuthUser = {
     name?: string;
-    [key: string]: any;
+    [key: string]: string | undefined;
 };
 
 type AuthProps = {
     user?: AuthUser;
-    [key: string]: any;
+    [key: string]: string | AuthUser | undefined;
 };
 
 const AppHeader = () => {
