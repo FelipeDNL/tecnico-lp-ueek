@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-export function pegarNome() {
+export function usePegarNome() {
     return useCallback((fullName: string): string => {
         const trimmed = fullName.trim();
         const firstSpaceIdx = trimmed.indexOf(' ');

@@ -22,7 +22,7 @@ interface Depoimento {
 interface FormData {
     usuario: string;
     mensagem: string;
-    [key: string]: any;
+    [key: string]: string;
 }
 
 export default function EditDepoimento() {

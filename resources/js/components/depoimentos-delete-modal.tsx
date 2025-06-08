@@ -8,10 +8,9 @@ import toast from 'react-hot-toast';
 interface DeleteDepoimentoModalProps {
     depoimentoIds: number[];
     className?: string;
-    variant?: 'button' | 'menuItem';
 }
 
-export default function DeleteDepoimentoModal({ depoimentoIds, className, variant = 'button' }: DeleteDepoimentoModalProps) {
+export default function DeleteDepoimentoModal({ depoimentoIds, className}: DeleteDepoimentoModalProps) {
     const [isDeleting, setIsDeleting] = useState(false);
     const [open, setOpen] = useState(false);
 
@@ -60,14 +59,14 @@ export default function DeleteDepoimentoModal({ depoimentoIds, className, varian
                 </DialogDescription>
                 <DialogFooter className="gap-2">
                     <DialogClose asChild>
-                        <Button variant="secondary">
+                        <Button>
                             Cancelar
                         </Button>
                     </DialogClose>
-                    <Button 
-                        variant="destructive" 
+                    <Button  
                         onClick={handleDelete}
                         disabled={isDeleting}
+                        className="bg-red-500 hover:bg-red-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
                     >
                         {isDeleting ? 'Excluindo...' : 'Excluir'}
                     </Button>

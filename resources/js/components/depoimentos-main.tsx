@@ -70,7 +70,6 @@ export function DepoimentosMain() {
                     <Checkbox
                         checked={
                             row.getIsSelected()
-                            || (selectedIds.includes(row.original.id) && "indeterminate")
                         }
                         onCheckedChange={value => row.toggleSelected(!!value)}
                         aria-label="Selecionar linha"
@@ -172,8 +171,6 @@ export function DepoimentosMain() {
 
     const selectedRows = table.getFilteredSelectedRowModel().rows;
     const selectedIds = selectedRows.map(row => row.original.id);
-
-    console.log("Selected IDs:", selectedIds);
 
     return (
         <div className="w-full px-4">

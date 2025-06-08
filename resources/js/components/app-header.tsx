@@ -3,12 +3,23 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
 import { router, usePage } from "@inertiajs/react";
 import { ChevronDown, Link } from "lucide-react";
-import { pegarNome } from "@/hooks/use-nome";
+import { usePegarNome } from "@/hooks/use-nome";
+
+type AuthUser = {
+    name?: string;
+    [key: string]: any;
+};
+
+type AuthProps = {
+    user?: AuthUser;
+    [key: string]: any;
+};
 
 const AppHeader = () => {
-    const { auth } = usePage().props as { auth?: { user?: any } };
+    const auth = usePage().props.auth as AuthProps;
     const estaLogado = !!auth?.user;
-    const getNome = pegarNome();
+    const getNome = usePegarNome();
+    const nome = getNome(auth?.user?.name ?? "");
     const cleanup = useMobileNavigation();
 
     const handleLogout = () => {
@@ -155,7 +166,7 @@ const AppHeader = () => {
                         <Menu as="div" className="relative inline-block text-left">
                             <div>
                                 <MenuButton className="break-all inline-flex w-full items-center justify-center gap-x-1 inline-block rounded-md border border-[#19140035] px-3 py-1.5 text-xs leading-normal text-white hover:border-white ring-1 ring-inset hover:cursor-pointer hover:bg-gray-10">
-                                    {getNome(auth.user.name)}
+                                    {nome}
                                     <ChevronDown />
                                 </MenuButton>
                             </div>
