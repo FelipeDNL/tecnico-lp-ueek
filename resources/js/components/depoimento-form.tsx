@@ -24,16 +24,20 @@ export default function DepoimentoForm({
 }: DepoimentoFormProps) {
     const { data, setData, reset } = useForm(initialData);
 
-    
+
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         onSubmit(data, () => reset());
-        
+
     };
 
     return (
-        <form onSubmit={submit} className="space-y-4 p-4 flex flex-col px-5 md:px-20 max-w-4xl">
+        <form
+            onSubmit={submit}
+            className="space-y-4 p-4 flex flex-col px-5 md:px-20 max-w-4xl"
+            aria-label={initialData.usuario ? 'Editar Depoimento' : 'Novo Depoimento'}
+        >
             <h2 className="text-lg font-semibold">{initialData.usuario ? 'Editar Depoimento' : 'Novo Depoimento'}</h2>
             <p>Preencha os campos abaixo para {initialData.usuario ? 'editar' : 'enviar um novo'} depoimento.</p>
             <div>
@@ -44,9 +48,10 @@ export default function DepoimentoForm({
                     onChange={e => setData('usuario', e.target.value)}
                     disabled={processing}
                     required
-
+                    aria-label="Nome"
+                    tabIndex={0}
                 />
-                {errors.usuario && <div className="text-red-500 text-xs">{errors.usuario}</div>}
+                {errors.usuario && <div className="text-red-500 text-xs" aria-live="polite">{errors.usuario}</div>}
             </div>
             <div>
                 <Textarea
@@ -58,12 +63,14 @@ export default function DepoimentoForm({
                     disabled={processing}
                     className={"w-full border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-[color,box-shadow] "}
                     required
+                    aria-label="Depoimento"
+                    tabIndex={0}
                 />
-                {errors.mensagem && <div className="text-red-500 text-xs">{errors.mensagem}</div>}
+                {errors.mensagem && <div className="text-red-500 text-xs" aria-live="polite">{errors.mensagem}</div>}
             </div>
             <div className="flex gap-2 transition-[color,box-shadow] ">
-                <Button type="submit" disabled={processing}>Salvar</Button>
-                <Button type="button" variant="secondary" onClick={onClose}>Cancelar</Button>
+                <Button type="submit" disabled={processing} aria-label="Salvar depoimento" tabIndex={0}>Salvar</Button>
+                <Button type="button" variant="secondary" onClick={onClose} aria-label="Cancelar" tabIndex={0}>Cancelar</Button>
             </div>
         </form>
     );

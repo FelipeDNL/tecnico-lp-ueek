@@ -175,26 +175,28 @@ export function DepoimentosMain() {
     return (
         <div className="w-full px-4">
             <div className="flex flex-row items-center justify-between mb-2">
-                <p className="text-sm p-4">
+                <p className="text-sm p-4" id="depoimentos-desc">
                     Aqui você pode visualizar, adicionar, editar, deletar e exportar depoimentos no modelo CSV.
                     <br />Caso queira excluir vários depoimentos, selecione-os e clique no botão de exclusão.
                 </p>
                 <Link
                     href={route('depoimentos.create')}
                     className="inline-block rounded-md border border-[#19140035] px-2 py-1 text-xs leading-normal bg-[#A7EE43] text-black hover:ring-1 hover:ring-[#A7EE43] hover:transition-[color,box-shadow] hover:ring-offset-1 hover:ring-offset-[#19140035] hover:border-black"
+                    aria-label="Adicionar novo depoimento"
+                    tabIndex={0}
                 >
                     <div className="flex flex-row justify-center items-center lg:text-sm lg:gap-1">
-                        Depoimento <Plus className="h-4 w-4 lg:h-5 lg:w-5" />
+                        Depoimento <Plus className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
                     </div>
                 </Link>
             </div>
-            <div className="rounded-md border">
+            <div className="rounded-md border" role="region" aria-labelledby="depoimentos-desc">
                 <Table>
                     <TableHeader>
                         {table.getHeaderGroups().map(headerGroup => (
                             <TableRow key={headerGroup.id}>
                                 {headerGroup.headers.map(header => (
-                                    <TableHead key={header.id}>
+                                    <TableHead key={header.id} tabIndex={0} aria-label={typeof header.column.columnDef.header === 'string' ? header.column.columnDef.header : undefined}>
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(header.column.columnDef.header, header.getContext())}
@@ -209,9 +211,11 @@ export function DepoimentosMain() {
                                 <TableRow
                                     key={row.id}
                                     data-state={row.getIsSelected() && "selected"}
+                                    tabIndex={0}
+                                    aria-selected={row.getIsSelected()}
                                 >
                                     {row.getVisibleCells().map(cell => (
-                                        <TableCell key={cell.id}>
+                                        <TableCell key={cell.id} tabIndex={0}>
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                         </TableCell>
                                     ))}
@@ -219,7 +223,7 @@ export function DepoimentosMain() {
                             ))
                         ) : (
                             <TableRow>
-                                <TableCell colSpan={columns.length} className="h-24 text-center">
+                                <TableCell colSpan={columns.length} className="h-24 text-center" tabIndex={0}>
                                     Nenhum resultado.
                                 </TableCell>
                             </TableRow>
@@ -227,8 +231,8 @@ export function DepoimentosMain() {
                     </TableBody>
                 </Table>
             </div>
-            <div className="flex items-center justify-end space-x-2 py-4">
-                <div className="text-muted-foreground flex-1 text-sm">
+            <div className="flex items-center justify-end space-x-2 py-4" aria-label="Paginação e ações">
+                <div className="text-muted-foreground flex-1 text-sm" aria-live="polite">
                     {table.getFilteredSelectedRowModel().rows.length} de{" "}
                     {table.getFilteredRowModel().rows.length} linha(s) selecionada(s).
                 </div>
@@ -238,6 +242,8 @@ export function DepoimentosMain() {
                         size="sm"
                         onClick={() => table.previousPage()}
                         disabled={!table.getCanPreviousPage()}
+                        aria-label="Página anterior"
+                        tabIndex={0}
                     >
                         Anterior
                     </Button>
@@ -246,6 +252,8 @@ export function DepoimentosMain() {
                         size="sm"
                         onClick={() => table.nextPage()}
                         disabled={!table.getCanNextPage()}
+                        aria-label="Próxima página"
+                        tabIndex={0}
                     >
                         Próxima
                     </Button>
@@ -254,16 +262,20 @@ export function DepoimentosMain() {
                         size="sm"
                         onClick={() => window.open(route('depoimentos.export'), '_blank')}
                         className="bg-green-600 hover:bg-green-900"
+                        aria-label="Exportar depoimentos em CSV"
+                        tabIndex={0}
                     >
                         Exportar leads
                     </Button>
                 </div>
             </div>
-            <div className="flex items-center justify-end space-x-2">
+            <div className="flex items-center justify-end space-x-2" tabIndex={0} aria-label="Ações em massa">
                 {selectedIds.length > 1 && (
                     <DeleteDepoimentoModal
                         depoimentoIds={selectedIds}
                         className="text-xs bg-red-600 text-white hover:bg-red-700 px-4 py-2 rounded-md"
+                        aria-label="Excluir depoimentos selecionados"
+
                     />
                 )}
             </div>

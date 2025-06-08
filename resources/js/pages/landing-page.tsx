@@ -64,8 +64,8 @@ export default function LandingPage() {
                                 }}
                                 src='/landing-page-images/tabela-meio.png'
                                 className='absolute left-1/2 md:max-w-auto lg:max-w-[1020px] h-auto'
-                                alt="Tabela demonstrativa"
-                                aria-label="Tabela demonstrativa"
+                                alt="Tabela demonstrativa dos planos Movefit"
+                                aria-label="Tabela demonstrativa dos planos Movefit"
                             />
                         </div>
 
@@ -135,7 +135,7 @@ export default function LandingPage() {
                                     >
                                         Depoimentos
                                     </h1>
-                                    
+
                                     <div className="flex flex-col gap-4 px-3 w-full lg:flex-row lg:flex-wrap lg:justify-evenly lg:items-start">
                                         {depoimentos && depoimentos.map((dep, idx) => (
                                             <div
@@ -167,10 +167,10 @@ export default function LandingPage() {
 
                                     <div className="flex items-center justify-center embla xl:hidden hover:cursor-grabbing" ref={emblaRef}>
                                         <div className="embla__container">
-                                            <img className="embla__slide" src="/landing-page-images/frame 1.png" />
-                                            <img className="embla__slide" src="/landing-page-images/frame 2.png" />
-                                            <img className="embla__slide" src="/landing-page-images/frame 3.png" />
-                                            <img className="embla__slide" src="/landing-page-images/frame 4.png" />
+                                            <img className="embla__slide" src="/landing-page-images/frame 1.png" alt="Foto de treino funcional" aria-label="Foto de treino funcional" />
+                                            <img className="embla__slide" src="/landing-page-images/frame 2.png" alt="Foto de alongamento em grupo" aria-label="Foto de alongamento em grupo" />
+                                            <img className="embla__slide" src="/landing-page-images/frame 3.png" alt="Foto de musculação" aria-label="Foto de musculação" />
+                                            <img className="embla__slide" src="/landing-page-images/frame 4.png" alt="Foto de aula coletiva" aria-label="Foto de aula coletiva" />
                                         </div>
                                     </div>
 
@@ -178,26 +178,26 @@ export default function LandingPage() {
                                         <img
                                             src="/landing-page-images/frame 1.png"
                                             className=' w-[290px] '
-                                            alt="Galeria de imagens"
-                                            aria-label="Galeria de imagens"
+                                            alt="Foto de treino funcional"
+                                            aria-label="Foto de treino funcional"
                                         />
                                         <img
                                             src="/landing-page-images/frame 2.png"
                                             className=' w-[290px] '
-                                            alt="Galeria de imagens"
-                                            aria-label="Galeria de imagens"
+                                            alt="Foto de alongamento em grupo"
+                                            aria-label="Foto de alongamento em grupo"
                                         />
                                         <img
                                             src="/landing-page-images/frame 3.png"
                                             className=' w-[290px] '
-                                            alt="Galeria de imagens"
-                                            aria-label="Galeria de imagens"
+                                            alt="Foto de musculação"
+                                            aria-label="Foto de musculação"
                                         />
                                         <img
                                             src="/landing-page-images/frame 4.png"
                                             className=' w-[290px] '
-                                            alt="Galeria de imagens"
-                                            aria-label="Galeria de imagens"
+                                            alt="Foto de aula coletiva"
+                                            aria-label="Foto de aula coletiva"
                                         />
                                     </div>
                                 </div>
@@ -211,8 +211,8 @@ export default function LandingPage() {
                         <img
                             src="/landing-page-images/logo-movefit.png"
                             className="object-scale-down h-10 w-auto"
-                            alt="Logo Movefit"
-                            aria-label="Logo Movefit"
+                            alt="Logo da Movefit"
+                            aria-label="Logo da Movefit"
                         />
                     </div>
 
