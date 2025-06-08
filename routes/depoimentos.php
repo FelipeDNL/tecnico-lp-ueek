@@ -13,4 +13,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('dashboard/editar/{id}', [DepoimentoController::class, 'update'])->name('depoimentos.update');
 
     Route::delete('dashboard/{id}', [DepoimentoController::class, 'destroy'])->name('depoimentos.destroy');
+    Route::delete('dashboard', [DepoimentoController::class, 'bulkDestroy'])->name('depoimentos.bulkDestroy');
+
+    Route::get('dashboard/exportar', [DepoimentoController::class, 'export'])->name('depoimentos.export');
 });

@@ -6,52 +6,57 @@ import { Trash2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 interface DeleteDepoimentoModalProps {
-    depoimentoId: number;
+    depoimentoIds: number[];
     className?: string;
     variant?: 'button' | 'menuItem';
 }
 
-export default function DeleteDepoimentoModal({ depoimentoId, className, variant = 'button' }: DeleteDepoimentoModalProps) {
+export default function DeleteDepoimentoModal({ depoimentoIds, className, variant = 'button' }: DeleteDepoimentoModalProps) {
     const [isDeleting, setIsDeleting] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleDelete = () => {
-        setIsDeleting(true);
-        router.delete(route('depoimentos.destroy', depoimentoId), {
-            onSuccess: () => {
-                toast.success('Depoimento excluído com sucesso!');
-                setIsDeleting(false);
-            },
-            onError: () => {
-                toast.error('Erro ao excluir depoimento. Tente novamente.');
-                setIsDeleting(false);
-            }
-        });
+        if (depoimentoIds.length === 1) {
+            setIsDeleting(true);
+            router.delete(route('depoimentos.destroy', depoimentoIds[0]), {
+                onSuccess: () => {
+                    toast.success('Depoimento excluído com sucesso!');
+                    setIsDeleting(false);
+                    setOpen(false); // Fecha o modal após sucesso
+                },
+                onError: () => {
+                    toast.error('Erro ao excluir depoimento. Tente novamente.');
+                    setIsDeleting(false);
+                }
+            });
+        } else {
+            setIsDeleting(true);
+            router.delete(route('depoimentos.bulkDestroy'), {
+                data: { ids: depoimentoIds },
+                onSuccess: () => {
+                    toast.success('Depoimentos excluídos com sucesso!');
+                    setIsDeleting(false);
+                    setOpen(false); // Fecha o modal após sucesso
+                },
+                onError: () => {
+                    toast.error('Erro ao excluir depoimentos. Tente novamente.');
+                    setIsDeleting(false);
+                }
+            });
+        }
     };
 
-    const TriggerContent = () => (
-        <div className="flex flex-row justify-center items-center lg:text-sm lg:gap-1">
-            <Trash2 className="h-4 w-4 lg:h-5 lg:w-5 mr-2" />
-            {variant === 'menuItem' ? 'Excluir' : 'Apagar'}
-        </div>
-    );
-
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                {variant === 'menuItem' ? (
                     <button className={className}>
                         <p className='flex'><Trash2 className="h-4 w-4 mr-2" /> Excluir </p>
                     </button>
-                ) : (
-                    <button className={className}>
-                        <TriggerContent />
-                    </button>
-                )}
             </DialogTrigger>
             <DialogContent>
-                <DialogTitle>Tem certeza que deseja excluir este depoimento?</DialogTitle>
+                <DialogTitle>Tem certeza que deseja excluir este(s) depoimento(s)?</DialogTitle>
                 <DialogDescription>
-                    Esta ação não pode ser desfeita. O depoimento será permanentemente removido do sistema.
+                    Esta ação não pode ser desfeita. O(s) depoimento(s) será(ão) permanentemente removido(s) do sistema.
                 </DialogDescription>
                 <DialogFooter className="gap-2">
                     <DialogClose asChild>

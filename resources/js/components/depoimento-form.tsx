@@ -24,6 +24,8 @@ export default function DepoimentoForm({
 }: DepoimentoFormProps) {
     const { data, setData, reset } = useForm(initialData);
 
+    
+
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         onSubmit(data, () => reset());
@@ -41,6 +43,8 @@ export default function DepoimentoForm({
                     value={data.usuario}
                     onChange={e => setData('usuario', e.target.value)}
                     disabled={processing}
+                    required
+
                 />
                 {errors.usuario && <div className="text-red-500 text-xs">{errors.usuario}</div>}
             </div>
@@ -53,6 +57,7 @@ export default function DepoimentoForm({
                     onChange={e => setData('mensagem', e.target.value)}
                     disabled={processing}
                     className={"w-full border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-[color,box-shadow] "}
+                    required
                 />
                 {errors.mensagem && <div className="text-red-500 text-xs">{errors.mensagem}</div>}
             </div>

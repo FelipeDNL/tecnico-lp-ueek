@@ -38,6 +38,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
                             autoComplete="off"
                             value={data.email}
                             autoFocus
+                            required
                             onChange={(e) => setData('email', e.target.value)}
                             placeholder="email@exemplo.com"
                         />

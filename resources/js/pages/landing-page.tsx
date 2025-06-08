@@ -20,7 +20,7 @@ export default function LandingPage() {
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
 
-            <div className="flex flex-col items-center px-0 p-3 text-[#EDEDEC] bg-[#080F17]">
+            <div className="flex flex-col items-center px-0 text-[#EDEDEC] bg-[#080F17]">
 
                 <AppHeader />
 
@@ -70,7 +70,7 @@ export default function LandingPage() {
                         </div>
 
                         <div className="flex flex-col pt-40 sm:pt-60 md:pt-70 md:p-5 lg:max-w-7xl">
-                            <h1 className='text-3xl font-semibold mb-4 px-5 text-start text-[#EDEDEC] pb-5 md:text-4xl md:px-0'
+                            <h1 className='text-3xl font-semibold mb-4 px-5 text-start text-[#EDEDEC] pb-5 md:text-4xl md:px-0 scroll-m-25'
                                 id='beneficios'
                             >
                                 Benefícios
@@ -130,7 +130,7 @@ export default function LandingPage() {
                             </div>
                             {depoimentos && depoimentos.length !== 0 && (
                                 <div className='flex flex-col items-start justify-start gap-3 pt-15 px-3'>
-                                    <h1 className='text-3xl px-2 font-semibold mb-4 text-start text-[#EDEDEC] md:text-4xl md:px-0'
+                                    <h1 className='text-3xl px-2 font-semibold mb-4 text-start text-[#EDEDEC] md:text-4xl md:px-0 scroll-m-25'
                                         id='depoimentos'
                                     >
                                         Depoimentos

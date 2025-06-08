@@ -17,7 +17,7 @@ const AppHeader = () => {
     }
 
     return (
-        <header className="sticky top-0 z-50 border-b border-[#FFFFFF33] bg-[#080F17] mb-3 text-m pb-4 pt-2 px-4 lg:px-65 w-full ">
+        <header className="sticky top-0 z-50 border-b border-[#FFFFFF33] bg-[#080F17] pt-2.5 pb-4 px-4 lg:px-65 w-full">
             <nav className="flex gap-4">
                 <div className='flex items-center justify-start gap-9 text-[#EDEDEC]'>
 
@@ -91,10 +91,10 @@ const AppHeader = () => {
                         />
                     </div>
 
-                    <div className="hidden md:flex items-center gap-6"
+                    <div className="hidden md:flex items-center gap-6 sm:text-base"
                         id='menu-navegacao'>
                         <div
-                            className="cursor-pointer"
+                            className="cursor-pointer hover:border-b-2 hover:border-[#A7EE43] transition-all duration-300"
                             onClick={() => {
                                 const section = document.getElementById('inicio');
                                 if (section) {
@@ -106,7 +106,7 @@ const AppHeader = () => {
                         </div>
 
                         <div
-                            className="cursor-pointer"
+                            className="cursor-pointer hover:border-b-2 hover:border-[#A7EE43] transition-all duration-300 "
                             onClick={() => {
                                 const section = document.getElementById('beneficios');
                                 if (section) {
@@ -118,7 +118,7 @@ const AppHeader = () => {
                         </div>
 
                         <div
-                            className="cursor-pointer"
+                            className="cursor-pointer hover:border-b-2 hover:border-[#A7EE43] transition-all duration-300"
                             onClick={() => {
                                 const section = document.getElementById('depoimentos');
                                 if (section) {
@@ -130,7 +130,7 @@ const AppHeader = () => {
                         </div>
 
                         <div
-                            className="cursor-pointer"
+                            className="cursor-pointer hover:border-b-2 hover:border-[#A7EE43] transition-all duration-300"
                             onClick={() => {
                                 const section = document.getElementById('galeria');
                                 if (section) {
@@ -154,7 +154,7 @@ const AppHeader = () => {
                     ) : (
                         <Menu as="div" className="relative inline-block text-left">
                             <div>
-                                <MenuButton className="inline-flex w-full items-center justify-center gap-x-1 rinline-block rounded-md border border-[#19140035] px-3 py-1.5 text-sm leading-normal text-white hover:border-white ring-1 ring-inset hover:cursor-pointer hover:bg-gray-10">
+                                <MenuButton className="break-all inline-flex w-full items-center justify-center gap-x-1 inline-block rounded-md border border-[#19140035] px-3 py-1.5 text-xs leading-normal text-white hover:border-white ring-1 ring-inset hover:cursor-pointer hover:bg-gray-10">
                                     {getNome(auth.user.name)}
                                     <ChevronDown />
                                 </MenuButton>
@@ -175,14 +175,6 @@ const AppHeader = () => {
                                     </MenuItem>
                                     <MenuItem>
                                         <a
-                                            href={route('login')}
-                                            className="block px-4 py-2 text-sm text-white data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
-                                        >
-                                            Leads
-                                        </a>
-                                    </MenuItem>
-                                    <MenuItem>
-                                        <a
                                             href={route('logout')}
                                             className="block px-4 py-2 text-sm text-white data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
                                             onClick={e => {
@@ -199,7 +191,7 @@ const AppHeader = () => {
                         </Menu>
                     )}
 
-                    <p className="inline-block rounded-md border border-[#19140035] px-4 py-2 text-sm  text-[#000A14] font-bold bg-[#A7EE43] hover:border-[#1915014a] hover:cursor-pointer">
+                    <p className="flex items-center justify-center inline-block rounded-md border border-[#19140035] px-4 py-2 text-xs text-[#000A14] font-bold bg-[#A7EE43] hover:border-[#1915014a] hover:cursor-pointer lg:text-sm">
                         Teste grátis
                     </p>
                 </div>

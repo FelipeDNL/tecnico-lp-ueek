@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Depoimentos;
 use Inertia\Inertia;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class DepoimentoController extends Controller
 {
@@ -65,4 +66,46 @@ class DepoimentoController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Depoimento excluído com sucesso!');
     }
+
+    public function bulkDestroy(Request $request) {
+        $ids = $request->input('ids', []);
+        Depoimentos::whereIn('id', $ids)->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Depoimentos excluídos com sucesso!');
+    }
+
+    public function export(){
+        $fileName = 'depoimentos.csv';
+        $depoimentos = Depoimentos::all();
+
+        $headers = [
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        ];
+
+        $columns = ['ID', 'Usuário', 'Mensagem', 'Depo. criado em'];
+
+        $callback = function() use ($depoimentos, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            foreach ($depoimentos as $dep) {
+                fputcsv($file, [
+                    $dep->id,
+                    $dep->usuario,
+                    $dep->mensagem,
+                    'email@exemplo.com', 
+                    $dep->created_at,
+                ]);
+            }
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
+
 }
