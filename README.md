@@ -3,10 +3,13 @@
   <img src='https://github.com/user-attachments/assets/57979977-e5f7-483b-9721-3cbde77ec7c2'/>
 </p>
 
-Projeto feito de acordo com o layout proposto utilizando o [starter kit do Laravel para React](https://laravel.com/docs/12.x/starter-kits#react). Inicialmente havia escolhido Next.js + Laravel mas a partir do Laravel 12.x, 
-Laravel Breeze, que seria usado em conjunto com Next.js, já não é mais [oficialmente documentado pelo Laravel](https://laravel.com/docs/12.x/starter-kits) e a fim de não me complicar demais, escolhi React sem framework frontend. 
+Projeto feito como etapa de teste técnico na empresa Ueek com o [layout proposto](https://www.figma.com/design/U8QZaSJh3mzgPMmHIpWkQB/LP-Dev?node-id=0-1) utilizando o [starter kit do Laravel para React](https://laravel.com/docs/12.x/starter-kits#react).
 
-Ainda sim, tentei meu melhor para seguir o padrão de projeto do starter kit. Assim os componentes principais se encontram em:
+
+![projeto](https://github.com/user-attachments/assets/27053239-7d04-4961-a274-35ecf95ac402)
+
+
+Os componentes principais se encontram em:
 
 ### Frontend:
 ```
